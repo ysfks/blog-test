@@ -48,9 +48,7 @@ class AuthenticationControllerTest extends TestCase
 
         $json = $response->json();
 
-        $login = $this->post('/api/login', $data, [
-            'Authentication' => "Bearer {$json['access_token']}"
-        ]);
+        $login = $this->post('/api/login', $data);
 
         $login->assertStatus(200)
             ->assertJsonStructure([
@@ -73,9 +71,7 @@ class AuthenticationControllerTest extends TestCase
 
         $data['password'] = 'pass';
 
-        $r = $this->post('/api/login', $data, [
-            'Authentication' => "Bearer {$json['access_token']}"
-        ]);
+        $r = $this->post('/api/login', $data);
 
         $r->assertStatus(302)
             ->assertJson([
